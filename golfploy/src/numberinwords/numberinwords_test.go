@@ -1,6 +1,9 @@
 package numberinwords_test
 
-import "testing"
+import (
+	. "numberinwords"
+	"testing"
+)
 
 func Test_ConvertDecimalToThaiCharactor_Input_100000_Should_Be_One_Hundred_Thousand_Baht(t *testing.T) {
 	expectedResult := "หนึ่งแสนบาทถ้วน"
