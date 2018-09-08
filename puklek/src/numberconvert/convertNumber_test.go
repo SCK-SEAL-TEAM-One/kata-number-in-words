@@ -29,3 +29,15 @@ func Test_ConvertNumber_Input_500000_Dot_00_Should_Be_Five_Hundred_Thousand_Baht
 	}
 
 }
+func Test_ConvertNumber_Input_500100_Dot_00_Should_Be_Five_Hundred_Thousand_One_Hundrad_Baht(t *testing.T) {
+	expected := "ห้าแสนหนึ่งร้อยบาทถ้วน"
+
+	money := 500100.00
+
+	actual := ConvertNumber(money)
+
+	if expected != actual {
+		t.Errorf("expected %s but got it %s", expected, actual)
+	}
+
+}

@@ -35,8 +35,8 @@ func ConvertNumber(money float64) string {
 	for _, unitMoney := range moneyString {
 		if string(unitMoney) != "0" {
 			convertNumber += fmt.Sprintf("%s%s", number[string(unitMoney)], unitNumber[units])
-			units--
 		}
+		units--
 	}
 
 	return convertNumber + "บาทถ้วน"
