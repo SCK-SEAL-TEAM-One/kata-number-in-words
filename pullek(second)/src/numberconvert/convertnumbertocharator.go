@@ -4,8 +4,8 @@ import (
 	"fmt"
 )
 
-func NumberConvert(number int) string {
-	numbrtString := fmt.Sprintf("%d", number)
+func NumberConvert(number float64) string {
+	numbrtString := fmt.Sprintf("%d", int(number))
 	unitNumber := map[int]string{
 		2: "สิบ",
 		3: "ร้อย",
