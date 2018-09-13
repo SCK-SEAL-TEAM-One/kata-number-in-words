@@ -2,11 +2,14 @@ package numberconvert
 
 import (
 	"fmt"
+	"strings"
 )
 
-func NumberConvert(number float64) string {
-	numbrtString := fmt.Sprintf("%d", int(number))
-	unitNumber := map[int]string{
+var unitNumber map[int]string
+var numberThai map[string]string
+
+func init() {
+	unitNumber = map[int]string{
 		2: "สิบ",
 		3: "ร้อย",
 		4: "พัน",
@@ -14,7 +17,7 @@ func NumberConvert(number float64) string {
 		6: "แสน",
 		7: "ล้าน",
 	}
-	numberThai := map[string]string{
+	numberThai = map[string]string{
 		"1": "หนึ่ง",
 		"2": "สอง",
 		"3": "สาม",
@@ -26,13 +29,31 @@ func NumberConvert(number float64) string {
 		"9": "เก้า",
 		"0": "",
 	}
-	var thaiCharactor string
-	lengthNumber := len(numbrtString)
-	for _, units := range numbrtString {
-		if string(units) != "0" {
-			thaiCharactor += fmt.Sprintf("%s%s", numberThai[string(units)], unitNumber[lengthNumber])
-		}
-		lengthNumber--
+}
+
+func NumberConvert(number float64) string {
+	numbrtString := fmt.Sprintf("%.2f", number)
+	splitNumber := strings.Split(numbrtString, ".")
+	numberInteger := splitNumber[0]
+	numberDecimal := splitNumber[1]
+
+	thaiCharactorInteger := ConvertNumberToThaiCharactor(numberInteger)
+	if numberDecimal != "00" {
+		thaiCharactorDecimal := ConvertNumberToThaiCharactor(numberDecimal)
+		return fmt.Sprintf("%sบาท%sสตางค์", thaiCharactorInteger, thaiCharactorDecimal)
 	}
-	return thaiCharactor + "บาทถ้วน"
+
+	return fmt.Sprintf("%sบาทถ้วน", thaiCharactorInteger)
+}
+
+func ConvertNumberToThaiCharactor(numberString string) string {
+	var thaiCharactorInteger string
+	lengthNumberInteger := len(numberString)
+	for _, unitsInteger := range numberString {
+		if string(unitsInteger) != "0" {
+			thaiCharactorInteger += fmt.Sprintf("%s%s", numberThai[string(unitsInteger)], unitNumber[lengthNumberInteger])
+		}
+		lengthNumberInteger--
+	}
+	return thaiCharactorInteger
 }

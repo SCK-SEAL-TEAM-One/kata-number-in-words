@@ -45,3 +45,13 @@ func Test_NumberConvert_Input_50000_Should_Be_Five_Thousand_Baht(t *testing.T) {
 		t.Errorf("expect %s but it got %s", expectedNumber, actual)
 	}
 }
+func Test_NumberConvert_Input_250dot50_Should_Be_Two_Hundred_And_Fifty_Baht_Fifty_Satang(t *testing.T) {
+	expectedNumber := "สองร้อยห้าสิบบาทห้าสิบสตางค์"
+	number := 250.50
+
+	actual := numberconvert.NumberConvert(number)
+
+	if expectedNumber != actual {
+		t.Errorf("expect %s but it got %s", expectedNumber, actual)
+	}
+}
